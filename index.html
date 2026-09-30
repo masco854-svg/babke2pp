@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petualangan Pelajar Pancasila - Media Pembelajaran Interaktif Kelas VII</title>
+<style>
+:root {
+  --navy: #102a43;
+  --blue: #1769aa;
+  --blue-light: #e6f0fa;
+  --gold: #f4b942;
+  --gold-light: #fffaf0;
+  --green: #2f855a;
+  --green-light: #c6f6d5;
+  --red: #c53030;
+  --red-light: #fed7d7;
+  --purple: #6b46c1;
+  --ink: #243b53;
+  --card-bg: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #eef6ff 0%, #fff8e8 100%);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+button {
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 18px;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.18s ease-in-out;
+  box-shadow: 0 4px 12px rgba(16, 42, 67, 0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(16, 42, 67, 0.2);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 22px;
+}
+
+/* Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 12px 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(16, 42, 67, 0.08);
+  position: sticky;
+  top: 10px;
+  z-index: 100;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.brand {
+  font-weight: 900;
+  color: var(--navy);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 18px;
+  letter-spacing: -0.3px;
+}
+
+.logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--gold), #ffe7a6);
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  box-shadow: 0 4px 10px rgba(244, 185, 66, 0.3);
+}
+
+.stats {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.pill {
+  background: #edf2f7;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--navy);
+}
+
+.icon-btn {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #edf2f7;
+  color: var(--navy);
+  box-shadow: none;
+}
+
+/* Hero Section */
+.hero {
+  margin-top: 24px;
+  background: linear-gradient(135deg, #102a43 0%, #1769aa 100%);
+  color: white;
+  border-radius: 28px;
+  padding: 42px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(16, 42, 67, 0.25);
+}
+
+.hero:after {
+  content: "★  ✦  ◆  ★";
+  position: absolute;
+  right: 28px;
+  top: 20px;
+  font-size: 70px;
+  opacity: 0.12;
+  letter-spacing: 10px;
+  pointer-events: none;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.1;
+  margin: 12px 0;
+  font-weight: 900;
+}
+
+.hero p {
+  font-size: 18px;
+  max-width: 760px;
+  color: #e6f0fa;
+  line-height: 1.6;
+}
+
+.primary { background: var(--gold); color: #3b2a08; }
+.secondary { background: white; color: var(--navy); }
+.danger { background: var(--red); color: white; }
+
+.section { margin-top: 32px; }
+.section h2 { margin-bottom: 16px; font-size: 24px; color: var(--navy); font-weight: 800; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  background: white;
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(16, 42, 67, 0.06);
+  border: 1px solid #dfe7ef;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card h3 { margin-top: 10px; margin-bottom: 8px; color: var(--navy); }
+.card p { line-height: 1.55; color: #485563; font-size: 14px; margin: 0; }
+
+button.card {
+  text-align: left;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(16, 42, 67, 0.06);
+  display: block;
+}
+
+button.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(16, 42, 67, 0.12);
+}
+
+.zone {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.zone .icon { font-size: 42px; }
+.locked { filter: grayscale(0.8); opacity: 0.65; cursor: not-allowed; }
+
+.progress {
+  height: 14px;
+  background: #e2e8f0;
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.progress > i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), #38a169);
+  width: 0;
+  transition: width 0.4s ease;
+}
+
+.hidden { display: none !important; }
+.screen { display: none; }
+.screen.active { display: block; animation: fadeIn 0.25s ease-out; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 42, 67, 0.7);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 200;
+}
+
+.modal.show { display: flex; }
+
+.modalbox {
+  max-width: 650px;
+  width: 100%;
+  background: white;
+  border-radius: 26px;
+  padding: 30px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+}
+
+.choice {
+  width: 100%;
+  text-align: left;
+  background: #f8fafc;
+  margin: 10px 0;
+  border: 2px solid #e2e8f0;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-size: 15px;
+  color: var(--ink);
+  transition: all 0.15s ease;
+}
+
+.choice:hover:not(:disabled) {
+  border-color: #90cdf4;
+  background: #ebf8ff;
+}
+
+.correct { background: var(--green-light) !important; border-color: #38a169 !important; color: #1c4532; font-weight: 700; }
+.wrong { background: var(--red-light) !important; border-color: #e53e3e !important; color: #742a2a; }
+
+.feedback {
+  padding: 16px;
+  border-radius: 16px;
+  margin-top: 16px;
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  line-height: 1.5;
+}
+
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0; }
+.tab { background: #edf2f7; color: var(--navy); border-radius: 12px; padding: 10px 16px; }
+.tab.active { background: var(--navy); color: white; }
+
+.material {
+  background: linear-gradient(135deg, #ffffff 0%, #fffaf0 100%);
+  border-left: 6px solid var(--gold);
+}
+
+.bigicon { font-size: 56px; margin-bottom: 8px; }
+.tag {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #ebf8ff;
+  color: #2b6cb0;
+  margin: 4px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Board Game (Ular Tangga) */
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+  background: #102a43;
+  padding: 10px;
+  border-radius: 20px;
+  max-width: 760px;
+  margin: 16px auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.cell {
+  aspect-ratio: 1;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  position: relative;
+  color: var(--navy);
+}
+
+.cell.ladder { background: var(--green-light); border: 2px dashed #2f855a; }
+.cell.snake { background: var(--red-light); border: 2px dashed #c53030; }
+.cell.player:after {
+  content: "🧑‍🎓";
+  position: absolute;
+  font-size: 22px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.dice { font-size: 64px; text-align: center; margin: 12px; user-select: none; }
+.gamecenter { text-align: center; }
+
+/* Match Game */
+.matchgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.matchitem {
+  padding: 16px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.15s ease;
+}
+
+.matchitem:hover { border-color: #90cdf4; background: #ebf8ff; }
+.matchitem.selected { border-color: #1769aa; background: #ebf8ff; box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.2); }
+.matchitem.done { background: var(--green-light); border-color: #38a169; color: #1c4532; cursor: default; }
+
+/* Crossword */
+.crossword {
+  display: grid;
+  grid-template-columns: repeat(9, 38px);
+  justify-content: center;
+  gap: 3px;
+  margin: 16px 0;
+}
+
+.cwcell {
+  width: 38px;
+  height: 38px;
+  border: 2px solid #cbd5e0;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 18px;
+  outline: none;
+}
+
+.cwcell:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.2); }
+.cwcell.black { background: var(--navy); border-color: var(--navy); cursor: default; }
+
+input[type=text] {
+  padding: 14px;
+  border: 2px solid #cbd5e0;
+  border-radius: 14px;
+  width: 100%;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+input[type=text]:focus { border-color: var(--blue); }
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--navy);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 999px;
+  display: none;
+  z-index: 300;
+  font-weight: 700;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  animation: popIn 0.2s ease;
+}
+
+@keyframes popIn {
+  from { transform: translate(-50%, 10px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+.small { font-size: 13px; color: #718096; }
+
+@media(max-width: 700px) {
+  .hero { padding: 28px 20px; }
+  .topbar { position: static; flex-wrap: wrap; gap: 10px; }
+  .stats { width: 100%; justify-content: space-between; }
+  .board { gap: 2px; padding: 6px; }
+  .cell { font-size: 9px; }
+  .crossword { grid-template-columns: repeat(9, 31px); }
+  .cwcell { width: 31px; height: 31px; font-size: 15px; }
+  .matchgrid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Top Navigation Bar -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">🇮🇩</div>
+      <span>PETUALANGAN PELAJAR PANCASILA</span>
+    </div>
+    <div class="stats">
+      <span class="pill">👤 <b id="playerName">Pelajar</b></span>
+      <span class="pill">⭐ <b id="score">0</b></span>
+      <span class="pill">❤️ <b id="lives">3</b></span>
+      <button class="icon-btn" onclick="toggleAudio()" id="audioBtn" title="Suara ON/OFF">🔊</button>
+      <button class="icon-btn" onclick="resetProgress()" title="Reset Kemajuan">🔄</button>
+    </div>
+  </header>
+
+  <!-- Home Screen -->
+  <main id="home" class="screen active">
+    <section class="hero">
+      <div class="small" style="color: #bfe0ff;">MEDIA PEMBELAJARAN INTERAKTIF • KELAS VII PPKn</div>
+      <h1>Petualangan<br>Pelajar Pancasila</h1>
+      <p>Misi menaklukkan lima zona nilai Pancasila melalui materi interaktif, kuis berjenjang, detektif kasus, matching nilai, ular tangga, dan teka-teki silang.</p>
+      <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+        <button class="primary" onclick="show('profile')">▶ MULAI PETUALANGAN</button>
+        <button class="secondary" onclick="show('materi')">📚 PELAJARI MATERI</button>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>🗺️ Peta Petualangan Nilai Pancasila</h2>
+      <div class="grid" id="zonePreview"></div>
+    </section>
+
+    <section class="section">
+      <h2>🎮 Permainan Pembelajaran</h2>
+      <div class="grid">
+        <div class="card"><div class="bigicon">🕵️</div><h3>Detektif Pancasila</h3><p>Analisis studi kasus kehidupan sekolah dan masyarakat.</p></div>
+        <div class="card"><div class="bigicon">🎲</div><h3>Ular Tangga</h3><p>Tingkatkan skor dengan menjawab pertanyaan sebelum melempar dadu.</p></div>
+        <div class="card"><div class="bigicon">🧩</div><h3>Pasangkan Nilainya</h3><p>Cocokkan situasi konkret dengan sila Pancasila yang tepat.</p></div>
+        <div class="card"><div class="bigicon">🔤</div><h3>TTS Pancasila</h3><p>Uji pemahaman istilah melalui Teka-Teki Silang mendatar & menurun.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Profile Setup Screen -->
+  <div id="profile" class="screen">
+    <div class="card" style="max-width: 600px; margin: 40px auto;">
+      <h2>👤 Siapa Petualang Hari Ini?</h2>
+      <p>Masukkan nama dan kelas untuk menyimpan perjalanan belajarmu.</p>
+      <div style="margin-top: 16px;">
+        <label class="small" style="font-weight: 700;">Nama Lengkap:</label>
+        <input id="nameInput" type="text" placeholder="Masukkan nama kamu..." style="margin-top: 6px;">
+      </div>
+      <div style="margin-top: 14px;">
+        <label class="small" style="font-weight: 700;">Kelas:</label>
+        <input id="classInput" type="text" placeholder="Contoh: VII A" style="margin-top: 6px;">
+      </div>
+      <div style="margin-top: 16px;">
+        <label class="small" style="font-weight: 700;">Mode Belajar:</label>
+        <div class="tabs">
+          <button class="tab active" onclick="setMode(this,'Individu')">👤 Individu</button>
+          <button class="tab" onclick="setMode(this,'Berdua')">👥 Berdua</button>
+          <button class="tab" onclick="setMode(this,'Kelompok')">👨‍👩‍👧‍👦 Kelompok</button>
+        </div>
+      </div>
+      <div style="margin-top: 24px; display: flex; gap: 10px;">
+        <button class="primary" style="flex: 1;" onclick="startGame()">🚀 MASUK KE PETA MISI</button>
+        <button class="secondary" onclick="show('home')">Kembali</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard / Mission Map Screen -->
+  <div id="dashboard" class="screen">
+    <section class="hero" style="padding: 30px;">
+      <h2 id="welcome" style="margin: 0; font-size: 28px;">Selamat datang!</h2>
+      <p style="margin-top: 8px;">Pilih zona atau arena permainan di bawah. Selesaikan zona untuk membuka misi berikutnya.</p>
+      <div style="margin-top: 16px;">
+        <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: #bfe0ff;">
+          <span>Kemajuan Petualangan</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress"><i id="mainProgress"></i></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>🗺️ Zona Misi Pancasila</h2>
+      <div class="grid" id="zones"></div>
+    </section>
+
+    <section class="section">
+      <h2>🎮 Arena Permainan</h2>
+      <div class="grid">
+        <button class="card" onclick="openGame('quiz')">
+          <span style="font-size: 36px;">🧠</span>
+          <h3>Quiz Pancasila</h3>
+          <p>10 soal evaluasi pilihan ganda dengan pembahasan lengkap.</p>
+        </button>
+        <button class="card" onclick="openGame('detective')">
+          <span style="font-size: 36px;">🕵️</span>
+          <h3>Detektif Pancasila</h3>
+          <p>Analisis situasi nyata dan buat keputusan yang beradab.</p>
+        </button>
+        <button class="card" onclick="openGame('match')">
+          <span style="font-size: 36px;">🧩</span>
+          <h3>Pasangkan Nilainya</h3>
+          <p>Jodohkan tindakan sehari-hari dengan sila yang sesuai.</p>
+        </button>
+        <button class="card" onclick="openGame('snake')">
+          <span style="font-size: 36px;">🎲</span>
+          <h3>Ular Tangga</h3>
+          <p>Jawab pertanyaan konsep sebelum mengocok dadu.</p>
+        </button>
+        <button class="card" onclick="openGame('crossword')">
+          <span style="font-size: 36px;">🔤</span>
+          <h3>TTS Pancasila</h3>
+          <p>Pecahkan kata-kata kunci terkait Pancasila.</p>
+        </button>
+        <button class="card" onclick="show('materi')">
+          <span style="font-size: 36px;">📚</span>
+          <h3>Materi Interaktif</h3>
+          <p>Rangkuman ringkas dan bermakna sebelum bertanding.</p>
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Interactive Learning Material Screen -->
+  <div id="materi" class="screen">
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <h2>📚 Materi Pembelajaran — Nilai-Nilai Pancasila</h2>
+        <button class="secondary" onclick="show('dashboard')">← Kembali ke Peta</button>
+      </div>
+      <div class="tabs" id="matTabs"></div>
+      <div id="matContent" style="margin-top: 16px;"></div>
+    </div>
+  </div>
+
+  <!-- Game Screen Wrapper -->
+  <div id="game" class="screen">
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #edf2f7; padding-bottom: 12px; margin-bottom: 18px;">
+        <h2 id="gameTitle" style="margin: 0;">Permainan</h2>
+        <button class="secondary" onclick="show('dashboard')">✕ Keluar</button>
+      </div>
+      <div id="gameContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Dialog -->
+<div id="modal" class="modal">
+  <div class="modalbox">
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" class="toast"></div>
+
+<script>
+// Web Audio Synthesizer for Interactive Feedback
+const Sound = {
+  ctx: null,
+  muted: false,
+  init() {
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) this.ctx = new AudioCtx();
+    }
+  },
+  playTone(freq, type, duration) {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+      gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + duration);
+    } catch (e) {}
+  },
+  correct() {
+    this.playTone(523.25, 'sine', 0.15); // C5
+    setTimeout(() => this.playTone(659.25, 'sine', 0.25), 120); // E5
+  },
+  wrong() {
+    this.playTone(220, 'sawtooth', 0.25);
+  },
+  dice() {
+    this.playTone(350, 'triangle', 0.1);
+  },
+  victory() {
+    [440, 554.37, 659.25, 880].forEach((f, i) => {
+      setTimeout(() => this.playTone(f, 'sine', 0.2), i * 120);
+    });
+  }
+};
+
+function toggleAudio() {
+  Sound.muted = !Sound.muted;
+  document.getElementById('audioBtn').textContent = Sound.muted ? '🔇' : '🔊';
+  toast(Sound.muted ? 'Suara dimatikan' : 'Suara diaktifkan');
+}
+
+// Global Zones Definition
+const zones = [
+  { icon: '⭐', name: 'Ketuhanan', sila: 'Ketuhanan Yang Maha Esa', color: '#f6e05e', desc: 'Toleransi, keimanan, dan menghargai keberagaman agama.' },
+  { icon: '⛓️', name: 'Kemanusiaan', sila: 'Kemanusiaan yang Adil dan Beradab', color: '#fc8181', desc: 'Peduli, menghargai martabat manusia, dan nondiskriminasi.' },
+  { icon: '🌳', name: 'Persatuan', sila: 'Persatuan Indonesia', color: '#68d391', desc: 'Menghargai keberagaman budaya dan mencintai tanah air.' },
+  { icon: '🐂', name: 'Kerakyatan', sila: 'Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan...', color: '#63b3ed', desc: 'Musyawarah mufakat, menghargai pendapat, dan demokrasi.' },
+  { icon: '🌾', name: 'Keadilan Sosial', sila: 'Keadilan Sosial bagi Seluruh Rakyat Indonesia', color: '#f6ad55', desc: 'Sikap adil, membantu sesama, antre, dan gotong royong.' }
+];
+
+// Interactive Learning Content
+const materials = [
+  {
+    title: 'Makna Sila',
+    icon: '🇮🇩',
+    body: 'Pancasila berasal dari bahasa Sanskerta: Panca (lima) dan Sila (dasar/alas). Kelima sila merupakan satu kesatuan yang utuh, bulat, dan saling berjiwa satu sama lain sebagai pedoman utama kehidupan bermasyarakat, berbangsa, dan bernegara.',
+    points: [
+      '1. Ketuhanan Yang Maha Esa',
+      '2. Kemanusiaan yang Adil dan Beradab',
+      '3. Persatuan Indonesia',
+      '4. Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan',
+      '5. Keadilan Sosial bagi Seluruh Rakyat Indonesia'
+    ]
+  },
+  {
+    title: 'Sila 1: Ketuhanan',
+    icon: '⭐',
+    body: 'Mengandung nilai keimanan, ketaqwaan, dan penghormatan setinggi-tingginya terhadap perbedaan agama dan kepercayaan di Indonesia.',
+    points: [
+      'Tidak memaksakan agama atau kepercayaan kepada orang lain',
+      'Taat beribadah sesuai agama masing-masing',
+      'Menjaga toleransi dan kerukunan antarumat beragama'
+    ]
+  },
+  {
+    title: 'Sila 2: Kemanusiaan',
+    icon: '⛓️',
+    body: 'Menekankan penghormatan terhadap hak dan martabat manusia tanpa membeda-bedakan latar belakang, serta membiasakan sikap empati dan adab.',
+    points: [
+      'Menghormati hak-hak sesama manusia',
+      'Bersikap peduli, empati, dan tidak merundung (anti-bullying)',
+      'Menolong korban bencana dan kegiatan kemanusiaan'
+    ]
+  },
+  {
+    title: 'Sila 3: Persatuan',
+    icon: '🌳',
+    body: 'Mengajarkan pentingnya menjaga keutuhan bangsa di tengah keberagaman suku, budaya, ras, dan antargolongan (Bhinneka Tunggal Ika).',
+    points: [
+      'Berteman tanpa membeda-bedakan asal daerah atau suku',
+      'Mencintai produk dan kebudayaan dalam negeri',
+      'Mengutamakan kepentingan bersama di atas kepentingan pribadi'
+    ]
+  },
+  {
+    title: 'Sila 4: Kerakyatan',
+    icon: '🐂',
+    body: 'Diwujudkan melalui kebiasaan musyawarah untuk mencapai mufakat, menghargai perbedaan pendapat, dan berjiwa besar menerima keputusan bersama.',
+    points: [
+      'Menyelesaikan masalah kelas melalui diskusi bersama',
+      'Menghargai dan mendengarkan pendapat orang lain',
+      'Berpartisipasi aktif dalam pemilihan ketua kelas atau OSIS'
+    ]
+  },
+  {
+    title: 'Sila 5: Keadilan Sosial',
+    icon: '🌾',
+    body: 'Berfokus pada keseimbangan antara hak dan kewajiban, penghargaan terhadap hasil karya orang lain, serta semangat gotong royong.',
+    points: [
+      'Membiasakan sikap tertib dan mau mengantre',
+      'Suka menolong dan bersikap adil dalam pembagian tugas',
+      'Tidak bergaya hidup mewah dan menghargai kerja keras'
+    ]
+  },
+  {
+    title: 'Tokoh Pendiri Bangsa',
+    icon: '🕰️',
+    body: 'Meneladani Ir. Sukarno, Drs. Mohammad Hatta, dan para tokoh pendiri negara dalam perumusan Pancasila pada sidang BPUPKI dan PPKI.',
+    points: [
+      'Ir. Sukarno: Mengusulkan nama Pancasila pada 1 Juni 1945',
+      'Drs. Mohammad Hatta: Berperan penting menjaga keutuhan bangsa pada perubahan Sila I dalam Piagam Jakarta',
+      'Nilai Keteladanan: Rela berkorban, mengutamakan persatuan, dan tanpa pamrih'
+    ]
+  }
+];
+
+// Quiz Dataset (10 Questions)
+const quiz = [
+  ['Sikap menghargai teman yang berbeda agama dan memberikan kesempatan beribadah merupakan penerapan sila ...', ['1', '2', '3', '4'], '1', 'Ketuhanan Yang Maha Esa mengajarkan penghormatan terhadap kebebasan beragama.'],
+  ['Menolong teman yang terjatuh dari sepeda tanpa memandang latar belakangnya mencerminkan sila ...', ['1', '2', '4', '5'], '2', 'Sila kedua menekankan kepedulian dan rasa kemanusiaan antar sesama.'],
+  ['Tidak membeda-bedakan teman berdasarkan suku atau asal daerah merupakan pengamalan sila ...', ['1', '2', '3', '5'], '3', 'Sila ketiga menekankan persatuan di tengah keberagaman suku bangsa.'],
+  ['Menentukan tempat tujuan studi tur kelas melalui diskusi bersama merupakan penerapan sila ...', ['2', '3', '4', '5'], '4', 'Sila keempat dilaksanakan melalui musyawarah mufakat.'],
+  ['Membiasakan budaya mengantre di kantin sekolah merupakan contoh pengamalan sila ...', ['1', '2', '4', '5'], '5', 'Budaya antre menunjukkan kepatuhan pada ketertiban dan keadilan sosial.'],
+  ['Pancasila menjadi pedoman utama dalam berperilaku dan mengambil keputusan sehari-hari. Ini fungsi Pancasila sebagai ...', ['pedoman hidup', 'sumber sejarah', 'simbol negara', 'hiasan kelas'], 'pedoman hidup', 'Pancasila berfungsi sebagai pandangan hidup bangsa.'],
+  ['Saat musyawarah, pendapatmu tidak terpilih menjadi keputusan akhir. Sikap yang tepat adalah ...', ['marah dan keluar', 'menerima dengan lapang dada', 'memaksa ulangi votasi', 'membenci teman'], 'menerima dengan lapang dada', 'Nilai kerakyatan menuntut kita menghargai keputusan bersama.'],
+  ['Wujud nyata menjaga persatuan Indonesia di lingkungan sekolah adalah ...', ['hanya berteman sesama daerah', 'menghargai tarian daerah lain', 'mengelek bahasa daerah', 'membuat kelompok eksklusif'], 'menghargai tarian daerah lain', 'Cinta kebudayaan Indonesia memperkokoh persatuan.'],
+  ['Melihat seorang teman dibully/diejek karena bentuk fisiknya, tindakan yang sesuai nilai Pancasila adalah ...', ['ikut menertawakan', 'diam saja', 'mengingatkan dan membela teman', 'merekam video'], 'mengingatkan dan membela teman', 'Menjaga martabat sesama manusia adalah amanat sila kedua.'],
+  ['Contoh penerapakan keadilan sosial dalam kegiatan kelompok adalah ...', ['mengerjakan tugas sendiri', 'membagi tugas secara adil dan merata', 'membebankan tugas ke satu orang', 'bermain game saat kelompokan'], 'membagi tugas secara adil dan merata', 'Keadilan sosial tercermin dari pembagian beban kerja yang seimbang.']
+];
+
+// Detective Scenarios
+const cases = [
+  ['Teman kelompokmu berbeda agama dan minta izin beribadah saat jam latihan kelompok. Beberapa anggota menyuruhnya menunda. Apa tindakan terbaikmu?', ['Menghormati dan memberinya waktu beribadah', 'Ikut melarang agar tugas cepat selesai', 'Pura-pura tidak mendengar', 'Menyuruhnya keluar dari kelompok'], 'Menghormati dan memberinya waktu beribadah', 'Sila 1'],
+  ['Terjadi perbedaan pendapat yang sengit tentang warna kostum pentas seni kelas. Langkah terbaik sesuai nilai kerakyatan adalah ...', ['Mengambil keputusan berdasarkan pendapat ketua saja', 'Bermusyawarah mencari jalan tengah atau pemungutan suara adil', 'Membatalkan keikutsertaan kelas', 'Saling berdebat tanpa henti'], 'Bermusyawarah mencari jalan tengah atau pemungutan suara adil', 'Sila 4'],
+  ['Seorang siswa baru dari keluarga kurang mampu kesulitan membeli buku pelajaran. Sikap kelas yang mencerminkan Keadilan Sosial adalah ...', ['Menyuruhnya beli sendiri', 'Patungan secara sukarela untuk membantu membelikan buku', 'Memintanya pindah sekolah', 'Mengabaikannya'], 'Patungan secara sukarela untuk membantu membelikan buku', 'Sila 5'],
+  ['Saat pentas budaya, ada siswa yang menertawakan pakaian adat daerah lain. Tindakanmu sebagai Pelajar Pancasila adalah ...', ['Ikut menertawakan', 'Mengingatkan dengan sopan agar saling menghargai budaya', 'Pura-pura tidak tahu', 'Membalas mengejek budayanya'], 'Mengingatkan dengan sopan agar saling menghargai budaya', 'Sila 3'],
+  ['Saat piket kelas, ada teman yang sengaja pulang duluan tanpa membersihkan area tugasnya. Sikap yang tepat adalah ...', ['Membiarkan dan ikut-ikutan pulang', 'Menegurnya dengan baik serta mengajaknya menyelesaikan tugas bersama', 'Melaporkan dengan marah-marah', 'Merusak mejanya'], 'Menegurnya dengan baik serta mengajaknya menyelesaikan tugas bersama', 'Sila 2']
+];
+
+// App State Management
+let state = {
+  name: 'Pelajar',
+  className: '',
+  mode: 'Individu',
+  score: 0,
+  lives: 3,
+  completed: new Set(),
+  mat: 0
+};
+
+// Load Saved State
+function loadSavedData() {
+  try {
+    const saved = localStorage.getItem('pancasila_app_data');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      state.name = parsed.name || 'Pelajar';
+      state.className = parsed.className || '';
+      state.score = parsed.score || 0;
+      state.lives = parsed.lives !== undefined ? parsed.lives : 3;
+      state.completed = new Set(parsed.completed || []);
+      updateUIStats();
+    }
+  } catch (e) {}
+}
+
+function saveData() {
+  try {
+    const toSave = {
+      name: state.name,
+      className: state.className,
+      score: state.score,
+      lives: state.lives,
+      completed: Array.from(state.completed)
+    };
+    localStorage.setItem('pancasila_app_data', JSON.stringify(toSave));
+  } catch (e) {}
+}
+
+function resetProgress() {
+  if (confirm('Apakah kamu yakin ingin mengulang seluruh kemajuan petualangan?')) {
+    localStorage.removeItem('pancasila_app_data');
+    state.score = 0;
+    state.lives = 3;
+    state.completed.clear();
+    updateUIStats();
+    renderZones();
+    show('home');
+    toast('Kemajuan telah direset.');
+  }
+}
+
+function updateUIStats() {
+  document.getElementById('playerName').textContent = state.name;
+  document.getElementById('score').textContent = state.score;
+  document.getElementById('lives').textContent = state.lives;
+}
+
+function show(id) {
+  document.querySelectorAll('.screen').forEach(x => x.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function setMode(btn, mode) {
+  document.querySelectorAll('#profile .tab').forEach(x => x.classList.remove('active'));
+  btn.classList.add('active');
+  state.mode = mode;
+}
+
+function startGame() {
+  state.name = document.getElementById('nameInput').value.trim() || 'Pelajar';
+  state.className = document.getElementById('classInput').value.trim();
+  updateUIStats();
+  document.getElementById('welcome').textContent = `Selamat bertualang, ${state.name}! 🇮🇩`;
+  saveData();
+  renderZones();
+  show('dashboard');
+  toast('Petualangan Dimulai!');
+}
+
+function addScore(n) {
+  state.score += n;
+  document.getElementById('score').textContent = state.score;
+  saveData();
+}
+
+function loseLife() {
+  state.lives = Math.max(0, state.lives - 1);
+  document.getElementById('lives').textContent = state.lives;
+  saveData();
+  if (state.lives === 0) {
+    Sound.wrong();
+    modal(`
+      <h2>❤️ Nyawamu Habis!</h2>
+      <p>Jangan berkecil hati. Pelajari kembali materi, lalu isi kembali energimu untuk mencoba lagi.</p>
+      <button class="primary" onclick="closeModal(); state.lives=3; updateUIStats(); show('materi');">📚 Pelajari Materi & Coba Lagi</button>
+    `);
+  }
+}
+
+function toast(s) {
+  let t = document.getElementById('toast');
+  t.textContent = s;
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2000);
+}
+
+function modal(s) {
+  document.getElementById('modalContent').innerHTML = s;
+  document.getElementById('modal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
+}
+
+// Render Zones Preview & Dashboard
+function renderZones() {
+  let target = document.getElementById('zones');
+  target.innerHTML = zones.map((z, i) => {
+    const isLocked = i > 0 && !state.completed.has(i - 1);
+    const isDone = state.completed.has(i);
+    return `
+      <div class="card zone ${isLocked ? 'locked' : ''}" onclick="openZone(${i})" style="border-top: 6px solid ${z.color}">
+        <div>
+          <div class="icon">${z.icon}</div>
+          <h3>Zona ${i + 1} — ${z.name}</h3>
+          <p>${z.desc}</p>
+        </div>
+        <div style="margin-top: 14px; font-weight: 800; font-size: 13px;">
+          ${isDone ? '✅ MISI SELESAI' : isLocked ? '🔒 TERKUNCI' : '▶ BUKA MISI'}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  let pct = Math.round((state.completed.size / 5) * 100);
+  document.getElementById('mainProgress').style.width = pct + '%';
+  document.getElementById('progressPercent').textContent = pct + '%';
+
+  document.getElementById('zonePreview').innerHTML = zones.map((z, i) => `
+    <div class="card zone" style="border-top: 4px solid ${z.color}">
+      <div class="icon">${z.icon}</div>
+      <h3>Zona ${i + 1}: ${z.name}</h3>
+      <p>${z.sila}</p>
+    </div>
+  `).join('');
+}
+
+function openZone(i) {
+  if (i > 0 && !state.completed.has(i - 1)) {
+    Sound.wrong();
+    modal(`
+      <h2>🔒 Zona Masih Terkunci</h2>
+      <p>Selesaikan Zona ${i} terlebih dahulu untuk membuka petualangan di zona ini!</p>
+      <button class="primary" onclick="closeModal()">Siap, Mengerti!</button>
+    `);
+    return;
+  }
+  const gameTypes = ['quiz', 'detective', 'match', 'snake', 'crossword'];
+  openGame(gameTypes[i]);
+}
+
+function openGame(type) {
+  show('game');
+  let titles = {
+    quiz: '🧠 Quiz Pancasila',
+    detective: '🕵️ Detektif Pancasila',
+    match: '🧩 Pasangkan Nilainya',
+    snake: '🎲 Ular Tangga Pancasila',
+    crossword: '🔤 TTS Pancasila'
+  };
+  document.getElementById('gameTitle').textContent = titles[type];
+  ({
+    quiz: renderQuiz,
+    detective: renderDetective,
+    match: renderMatch,
+    snake: renderSnake,
+    crossword: renderCrossword
+  }[type])();
+}
+
+// Materials Section Render
+function renderMaterials() {
+  document.getElementById('matTabs').innerHTML = materials.map((m, i) => `
+    <button class="tab ${i === state.mat ? 'active' : ''}" onclick="state.mat=${i}; renderMaterials()">${m.icon} ${m.title}</button>
+  `).join('');
+
+  let m = materials[state.mat];
+  document.getElementById('matContent').innerHTML = `
+    <div class="card material">
+      <div class="bigicon">${m.icon}</div>
+      <h2>${m.title}</h2>
+      <p style="font-size: 16px; line-height: 1.6; color: #2d3748;">${m.body}</p>
+      <h3 style="margin-top: 20px;">Poin-Poin Penting:</h3>
+      <div>${m.points.map(x => `<div class="tag">✓ ${x}</div>`).join('')}</div>
+    </div>
+  `;
+}
+
+// Game 1: Quiz Pancasila
+function renderQuiz() {
+  let idx = 0, correct = 0;
+  const next = () => {
+    if (idx >= quiz.length) {
+      finish(0, correct, quiz.length);
+      return;
+    }
+    let q = quiz[idx];
+    document.getElementById('gameContent').innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: center;" class="small">
+        <span>Pertanyaan ${idx + 1} dari ${quiz.length}</span>
+        <span>Skor Sementara: +${correct * 10}</span>
+      </div>
+      <div class="progress"><i style="width:${(idx / quiz.length) * 100}%"></i></div>
+      <h2 style="font-size: 20px; margin-top: 14px;">${q[0]}</h2>
+      ${q[1].map((o, k) => `<button class="choice" onclick="answerQuiz(${k}, this)">${String.fromCharCode(65 + k)}. ${o}</button>`).join('')}
+      <div id="fb"></div>
+    `;
+
+    window.answerQuiz = (k, btn) => {
+      document.querySelectorAll('.choice').forEach(b => b.disabled = true);
+      let ok = q[1][k] === q[2];
+      btn.classList.add(ok ? 'correct' : 'wrong');
+      if (ok) {
+        Sound.correct();
+        correct++;
+        addScore(10);
+      } else {
+        Sound.wrong();
+        loseLife();
+      }
+      document.getElementById('fb').innerHTML = `
+        <div class="feedback">
+          <b>${ok ? '🎉 Benar sekali!' : '💡 Jawaban kurang tepat.'}</b><br>
+          ${q[3]}<br><br>
+          <button class="primary" onclick="idx++; next()">Lanjut Pertanyaan ▶</button>
+        </div>
+      `;
+    };
+  };
+  next();
+}
+
+// Game 2: Detective Pancasila
+function renderDetective() {
+  let idx = 0, correct = 0;
+  const next = () => {
+    if (idx >= cases.length) {
+      finish(1, correct, cases.length);
+      return;
+    }
+    let c = cases[idx];
+    document.getElementById('gameContent').innerHTML = `
+      <div class="tag">🕵️ Studi Kasus ${idx + 1} dari ${cases.length}</div>
+      <h2 style="font-size: 20px; margin-top: 12px; line-height: 1.5;">${c[0]}</h2>
+      ${c[1].map((o, k) => `<button class="choice" onclick="answerCase(${k}, this)">${String.fromCharCode(65 + k)}. ${o}</button>`).join('')}
+      <div id="fb"></div>
+    `;
+
+    window.answerCase = (k, btn) => {
+      document.querySelectorAll('.choice').forEach(b => b.disabled = true);
+      let ok = c[1][k] === c[2];
+      btn.classList.add(ok ? 'correct' : 'wrong');
+      if (ok) {
+        Sound.correct();
+        correct++;
+        addScore(20);
+      } else {
+        Sound.wrong();
+        loseLife();
+      }
+      document.getElementById('fb').innerHTML = `
+        <div class="feedback">
+          <b>${ok ? '🎯 Keputusan Tepat (Nilai Pancasila ' + c[3] + ')' : '⚠️ Belum mencerminkan nilai Pancasila secara optimal.'}</b><br>
+          Keputusan ini memperkokoh harmonisasi dan karakter Pelajar Pancasila.<br><br>
+          <button class="primary" onclick="idx++; next()">Kasus Berikutnya ▶</button>
+        </div>
+      `;
+    };
+  };
+  next();
+}
+
+// Game 3: Pasangkan Nilainya
+function renderMatch() {
+  let pairs = [
+    ['Menghargai kebebasan beragama', 'Sila 1'],
+    ['Menolong korban bencana alam', 'Sila 2'],
+    ['Menghargai tarian adat nusantara', 'Sila 3'],
+    ['Musyawarah pemilihan ketua kelas', 'Sila 4'],
+    ['Membiasakan budaya antre', 'Sila 5']
+  ];
+
+  let left = [...pairs].sort(() => Math.random() - 0.5);
+  let right = [...pairs.map(x => x[1])].sort(() => Math.random() - 0.5);
+  let a = null, b = null, done = 0;
+
+  document.getElementById('gameContent').innerHTML = `
+    <p>Pilih satu pernyataan di sebelah kiri, lalu pilih Sila yang sesuai di sebelah kanan.</p>
+    <div class="matchgrid">
+      <div>${left.map((x, i) => `<div class="matchitem" id="l${i}" onclick="pickL(${i})">${x[0]}</div>`).join('')}</div>
+      <div>${right.map((x, i) => `<div class="matchitem" id="r${i}" onclick="pickR(${i})">${x}</div>`).join('')}</div>
+    </div>
+    <div id="mfb" class="feedback" style="margin-top: 16px;">Silakan pilih pasangan kartu.</div>
+  `;
+
+  window.pickL = i => {
+    a = i;
+    document.querySelectorAll('[id^=l]').forEach(x => x.classList.remove('selected'));
+    document.getElementById('l' + i).classList.add('selected');
+    check();
+  };
+
+  window.pickR = i => {
+    b = i;
+    document.querySelectorAll('[id^=r]').forEach(x => x.classList.remove('selected'));
+    document.getElementById('r' + i).classList.add('selected');
+    check();
+  };
+
+  function check() {
+    if (a === null || b === null) return;
+    let ok = left[a][1] === right[b];
+    if (ok) {
+      Sound.correct();
+      document.getElementById('l' + a).classList.add('done');
+      document.getElementById('r' + b).classList.add('done');
+      document.getElementById('l' + a).onclick = null;
+      document.getElementById('r' + b).onclick = null;
+      addScore(15);
+      done++;
+      document.getElementById('mfb').innerHTML = '✅ <b>Pasangan Benar!</b> (+15 Poin)';
+      if (done === 5) {
+        state.completed.add(2);
+        saveData();
+        renderZones();
+        setTimeout(() => finish(2, 5, 5), 600);
+      }
+    } else {
+      Sound.wrong();
+      document.getElementById('mfb').innerHTML = '❌ <b>Belum Cocok.</b> Coba pasangan lain!';
+      loseLife();
+    }
+    a = b = null;
+    document.querySelectorAll('.matchitem').forEach(x => x.classList.remove('selected'));
+  }
+}
+
+// Game 4: Ular Tangga Pancasila
+function renderSnake() {
+  let pos = 1;
+  let cells = Array.from({ length: 50 }, (_, i) => i + 1);
+
+  function draw() {
+    document.getElementById('gameContent').innerHTML = `
+      <div class="gamecenter">
+        <p>Jawab tantangan pertanyaan untuk mengocok dadu. Petualang berada di Kotak <b>${pos}</b> / 50.</p>
+        <div class="board">
+          ${cells.map(n => `
+            <div class="cell ${[7, 18, 29, 41].includes(n) ? 'ladder' : ''} ${[14, 25, 37, 47].includes(n) ? 'snake' : ''} ${n === pos ? 'player' : ''}">
+              ${n}
+            </div>
+          `).join('')}
+        </div>
+        <div class="dice" id="dice">🎲</div>
+        <button class="primary" onclick="snakeQuestion()">❓ Jawab Tantangan Dadu</button>
+      </div>
+    `;
+  }
+
+  window.snakeQuestion = () => {
+    let q = quiz[Math.floor(Math.random() * quiz.length)];
+    modal(`
+      <h2>❓ Tantangan Dadu Pancasila</h2>
+      <p style="font-size: 17px;">${q[0]}</p>
+      ${q[1].map((o, i) => `
+        <button class="choice" onclick="snakeAnswer(${i}, ${i})">
+          ${String.fromCharCode(65 + i)}. ${o}
+        </button>
+      `).join('')}
+    `);
+
+    window.snakeAnswer = (choiceIdx) => {
+      let selectedText = q[1][choiceIdx];
+      let ok = selectedText === q[2];
+      closeModal();
+      if (!ok) {
+        Sound.wrong();
+        loseLife();
+        toast('Jawaban kurang tepat! Dadu gagal dikocok.');
+        return;
+      }
+      Sound.dice();
+      let roll = Math.floor(Math.random() * 6) + 1;
+      document.getElementById('dice').textContent = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'][roll - 1];
+      pos = Math.min(50, pos + roll);
+
+      let extraMsg = `Dadu: ${roll}.`;
+      if ([7, 18, 29, 41].includes(pos)) {
+        pos = Math.min(50, pos + 4);
+        extraMsg += ' 🪜 Naik Tangga Kejujuran! (+4 Kotak)';
+      } else if ([14, 25, 37, 47].includes(pos)) {
+        pos = Math.max(1, pos - 4);
+        extraMsg += ' 🐍 Tergelincir Ular Prasangka! (-4 Kotak)';
+      }
+
+      addScore(5);
+      toast(extraMsg);
+      draw();
+
+      if (pos >= 50) {
+        state.completed.add(3);
+        saveData();
+        renderZones();
+        finish(3, 1, 1);
+      }
+    };
+  };
+
+  draw();
+}
+
+// Game 5: TTS Pancasila (Aligned Intersection Crossword)
+function renderCrossword() {
+  const size = 9;
+  // Properly intersecting crossword words:
+  // 1. PANCASILA (Across, row 4, col 0..8)
+  // 2. ADIL (Down, row 0..3, col 4 -> intersects PANCASILA at 'A')
+  // 3. RUKUN (Down, row 0..4, col 2 -> intersects PANCASILA at 'N')
+  // 4. LUHUR (Down, row 4..8, col 7 -> intersects PANCASILA at 'L')
+
+  let words = [
+    { w: 'PANCASILA', r: 4, c: 0, d: 'across', q: 'Dasar negara Indonesia yang terdiri atas lima sila.' },
+    { w: 'ADIL', r: 0, c: 4, d: 'down', q: 'Sikap tidak memihak, seimbang, dan sesuai moral.' },
+    { w: 'RUKUN', r: 0, c: 2, d: 'down', q: 'Sikap hidup selaras, damai, dan tanpa pertengkaran.' },
+    { w: 'LUHUR', r: 4, c: 7, d: 'down', q: 'Sifat bermutu tinggi dan mulia dari nilai-nilai Pancasila.' }
+  ];
+
+  let active = [];
+  words.forEach(x => {
+    for (let i = 0; i < x.w.length; i++) {
+      let r = x.r + (x.d === 'down' ? i : 0);
+      let c = x.c + (x.d === 'across' ? i : 0);
+      active.push([r * size + c, x.w[i]]);
+    }
+  });
+
+  let allowed = new Map(active);
+
+  document.getElementById('gameContent').innerHTML = `
+    <p>Isi huruf kapital pada kotak putih sesuai petunjuk mendatar dan menurun.</p>
+    <div class="crossword">
+      ${Array.from({ length: 81 }, (_, i) => allowed.has(i) ? `<input maxlength="1" class="cwcell" data-i="${i}" autocomplete="off">` : `<div class="cwcell black"></div>`).join('')}
+    </div>
+    <div class="card" style="margin-top: 16px;">
+      <b>Petunjuk Teka-Teki:</b>
+      <ol style="margin: 8px 0 0 18px; padding: 0;">
+        ${words.map(x => `<li><b>${x.d === 'across' ? 'Mendatar' : 'Menurun'}</b> — ${x.q}</li>`).join('')}
+      </ol>
+    </div>
+    <div style="margin-top: 16px;">
+      <button class="primary" onclick="checkCW()">✓ Periksa Jawaban TTS</button>
+    </div>
+  `;
+
+  // Auto-focus behavior
+  const inputs = document.querySelectorAll('.cwcell[data-i]');
+  inputs.forEach((inp, idx) => {
+    inp.addEventListener('input', (e) => {
+      if (e.target.value && idx < inputs.length - 1) {
+        inputs[idx + 1].focus();
+      }
+    });
+  });
+
+  window.checkCW = () => {
+    let ok = true;
+    inputs.forEach(inp => {
+      let expected = allowed.get(+inp.dataset.i);
+      if (inp.value.toUpperCase() !== expected) {
+        ok = false;
+        inp.style.background = '#fed7d7';
+      } else {
+        inp.style.background = '#c6f6d5';
+      }
+    });
+
+    if (ok) {
+      Sound.correct();
+      addScore(50);
+      state.completed.add(4);
+      saveData();
+      renderZones();
+      modal(`
+        <h2>🎉 TTS Berhasil Dipecahkan!</h2>
+        <p>Semua kata kunci Pancasila berhasil diisi dengan tepat. Kamu resmi menyelesaikan seluruh Zona Misi!</p>
+        <button class="primary" onclick="closeModal(); show('dashboard');">Selesai & Lihat Kemajuan</button>
+      `);
+    } else {
+      Sound.wrong();
+      toast('Masih ada huruf yang belum tepat. Periksa kembali!');
+    }
+  };
+}
+
+// Finish Mission Dialog
+function finish(zone, correct, total) {
+  if (zone < 5) state.completed.add(zone);
+  saveData();
+  renderZones();
+  Sound.victory();
+  let pct = Math.round((correct / total) * 100);
+  modal(`
+    <h2>🎉 Misi Selesai!</h2>
+    <p>Hebat <b>${state.name}</b>, kamu memperoleh <b>${correct}/${total}</b> poin keberhasilan (${pct}%).</p>
+    <p>⭐ Skor kamu bertambah. Lanjutkan ke zona berikutnya!</p>
+    <button class="primary" onclick="closeModal(); show('dashboard');">Kembali ke Peta Misi</button>
+  `);
+}
+
+// Initial Boot
+loadSavedData();
+renderMaterials();
+renderZones();
+</script>
+</body>
+</html>
